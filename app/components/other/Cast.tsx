@@ -1,11 +1,13 @@
 import { Reveal } from "@/components/other/Reveal";
 import { MovieSuccessResponse } from "@/types/MovieData";
+import { ButtonLink } from "@/components/ui/buttonlink";
 
 interface CastProps {
   data: MovieSuccessResponse | null;
+  downloadUrl: string;
 }
 
-export function Cast({ data }: CastProps) {
+export function Cast({ data, downloadUrl }: CastProps) {
   if (!data) return null;
 
   const { Director, Actors, Writer } = data;
@@ -17,7 +19,7 @@ export function Cast({ data }: CastProps) {
   ];
 
   return (
-    <section id="cast" className="relative py-28 sm:py-36">
+    <section id="cast" className="relative pt-16 sm:pt-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal className="flex items-end justify-between gap-6">
           <div>
@@ -41,6 +43,10 @@ export function Cast({ data }: CastProps) {
             ))}
           </div>
         </Reveal>
+
+        <div className="mt-16 text-center sm:mt-24">
+          <ButtonLink href={downloadUrl}> Download Full Movie</ButtonLink>
+        </div>
       </div>
     </section>
   );

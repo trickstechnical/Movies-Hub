@@ -33,7 +33,7 @@ function Ring({ value, label, accent }: { value: number; label: string; accent: 
         <div className="absolute inset-0 grid place-items-center">
           <span className="font-display text-3xl">
             {value}
-            {label === "Audience" || label === "Rotten Tomatoes" ? "" : ""}
+            {label === "Audience" || label === "Rotten Tomatoes" ? "%" : ""}
           </span>
         </div>
       </div>
@@ -51,6 +51,8 @@ export function Reviews({ data }: ReviewsProps) {
 
   const { imdbRating, Ratings, Metascore } = data;
 
+  const rottenValue = Ratings[1].Value.split("%");
+
   return (
     <section id="reviews" className="relative py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -63,7 +65,7 @@ export function Reviews({ data }: ReviewsProps) {
           <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
             <Ring value={Number(imdbRating)} label="IMDb" accent="#f5c518" />
             <Ring
-              value={Number(Ratings[1].Value)}
+              value={Number(rottenValue[0])}
               label="Rotten Tomatoes"
               accent="oklch(0.62 0.24 27)"
             />

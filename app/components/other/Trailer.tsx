@@ -1,21 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { clips } from "@/components/other/data";
 import { Reveal } from "@/components/other/Reveal";
 import type { StaticImageData } from "next/image";
+import { ButtonLink } from "@/components/ui/buttonlink";
 
 interface TrailerProps {
   youtubeId: string;
   clip: StaticImageData;
   playTime: string;
+  downloadUrl: string;
 }
 
-export function Trailer({ youtubeId, clip, playTime }: TrailerProps) {
+export function Trailer({ youtubeId, clip, playTime, downloadUrl }: TrailerProps) {
   const [playing, setPlaying] = useState(false);
 
   return (
-    <section id="trailer" className="relative py-28 sm:py-36">
+    <section id="trailer" className="relative pt-16 sm:pt-24">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_30%,oklch(0.62_0.24_27/0.08),transparent_70%)]" />
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
@@ -29,9 +30,8 @@ export function Trailer({ youtubeId, clip, playTime }: TrailerProps) {
               {playing ? (
                 <iframe
                   className="absolute inset-0 h-full w-full"
-                  src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0`}
-                  title="Dune: Part Two — Official Trailer"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  src={`https://www.youtube.com/embed/${youtubeId}?rel=0`}
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
               ) : (
@@ -61,6 +61,10 @@ export function Trailer({ youtubeId, clip, playTime }: TrailerProps) {
             </div>
           </div>
         </Reveal>
+
+        <div className="mt-16 text-center sm:mt-24">
+          <ButtonLink href={downloadUrl}> Download Full Movie</ButtonLink>
+        </div>
       </div>
     </section>
   );
